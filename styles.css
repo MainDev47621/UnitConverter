@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+.main-form {
+    display: flex;
+}
+
+.test-div {
+    background: black;
+    width: 100px;
+    height: 100px;
+}
