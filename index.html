@@ -10,16 +10,19 @@
     </head>
     <body>
         <form class="main-form" action="#">
+            <div class="category-field">
+                <label for="category">Category: </label>
+                <select name="category" id="category">
+                    <option value="length">Length</option>
+                    <option value="temp">Temperature</option>
+                </select>
+            </div>
             <div class="input-fields"></div>
                 <label for="input-val">Input</label>
                 <input type="number" id="input-val" name="input-val">
 
                 <label for="input-unit">Input Unit</label>
-                <select name="input-unit" id="input-unit">
-                    <option value="C">Celcius</option>
-                    <option value="F">Fahrenheit</option>
-                    <option value="K">Kelvin</option>
-                </select>
+                <select name="input-unit" id="input-unit"></select>
             </div>
             <div class="output-fields">
                 <label for="output-val">Output</label>
