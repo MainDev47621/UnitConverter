@@ -79,13 +79,6 @@ const metricUnit = unit => {
 }
 
 const convertMeters = (len, oldUnit, newUnit) => {
-    console.log('convertMeters');
-    console.log(oldUnit, newUnit);
-    oldUnit = metricUnit(oldUnit);
-    newUnit = metricUnit(newUnit);
-    console.log(oldUnit, newUnit);
-    console.log(metricPrefixes[oldUnit], metricPrefixes[newUnit]);
-    console.log(len * (metricPrefixes[oldUnit] / metricPrefixes[newUnit]));
     return len * (metricPrefixes[oldUnit] / metricPrefixes[newUnit]);
 }
 
