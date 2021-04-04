@@ -26,7 +26,7 @@ const setCategory = () => {
     const category = document.getElementById('category').value;
     switch (category) {
         case 'length':
-            setUpUnits({'Kilometer' : 'kilometer', 'Meter' : 'meter', 'Centimeter' : 'centimeter', 'Millimeter' : 'millimeter'});
+            setUpUnits({'Kilometer' : 'kilometer', 'Meter' : 'unitmeter', 'Centimeter' : 'centimeter', 'Millimeter' : 'millimeter'});
             break;
         case 'temp':
             setUpUnits({'Celcius' : 'C', 'Fahrenheit' : 'F', 'Kelvin' : 'K'});
@@ -79,7 +79,7 @@ const metricUnit = unit => {
 }
 
 const convertMeters = (len, oldUnit, newUnit) => {
-    return len * (metricPrefixes[oldUnit] / metricPrefixes[newUnit]);
+    return len * (metricPrefixes[oldUnit.slice(0, -5)] / metricPrefixes[newUnit.slice(0, -5)]);
 }
 
 const convertLengthHelper = (len, oldUnit, newUnit) => {
@@ -88,7 +88,6 @@ const convertLengthHelper = (len, oldUnit, newUnit) => {
 
 const convertLength = (len, oldUnit, newUnit) => {
     console.log('convertLengthOuter');
-    console.log(oldUnit, newUnit);
     if (oldUnit.includes('meter') && oldUnit.includes('meter')) {
         console.log('convertLengthInner');
         return convertMeters(len, oldUnit, newUnit);
