@@ -66,27 +66,54 @@ const metricPrefixes = {
     'milli': 0.001
 }
 
-// const convCoeffs = {
-//     feetToMiles
-// }
 
-const metricUnit = unit => {
-    if (unit === 'meter') {
-        return 'unit';
-    } else {
-        return unit.slice(0, -5);
-    }
+//
+// Rows (ascending order): inch, foot, yard, mile, light year, meter
+// Columns: same as rows
+const lengthConversionMatrix = [
+    [1, 1/12, 1/36, 1/190080, 2.68478e-18, 0.0254],
+    [12, 1, 1/3, 1/5280, 3.22174e-17, 0.3048],
+    [36, 3, 1, 1/1760, 9.66522e-17, 0.9144],
+    [190080, 5280, 1760, 1, 1.70108e-13, 1609.344],
+    [3.725e+17, 3.104e+16, 1.035e+16, 5.879e+12, 1, 9.461e+15],
+    [39.3701, 3.28084, 1.09361, 0.000621371, 1.057e-16, 1]
+];
+
+const lengthMatrixIndex = {
+    'inch' : 0,
+    'foot' : 1,
+    'yard' : 2,
+    'mile' : 3,
+    'lightYear' : 4,
+    'meter' : 5
 }
 
+// Helper function for conversions in which both units are metric
 const convertMeters = (len, oldUnit, newUnit) => {
     return len * (metricPrefixes[oldUnit.slice(0, -5)] / metricPrefixes[newUnit.slice(0, -5)]);
 }
 
+// Helper function for conversions in which only one or neither unit is metric
 const convertLengthHelper = (len, oldUnit, newUnit) => {
-    // if ()
+    let newLen = len;
+    if (oldUnit.includes('meter')) {
+        newLen *= metricPrefixes[oldUnit.slice(0, -5)];
+    }
+
+    newLen *= lengthConversionMatrix[lengthMatrixIndex[oldUnit]][lengthMatrixIndex[newUnit]];
+
+    if (newUnit.includes('meter')) {
+        newLen /= metricPrefixes[newUnit.slice(0, -5)];
+    }
+
+    return newLen;
 }
 
 const convertLength = (len, oldUnit, newUnit) => {
+    if (oldUnit === newUnit) {
+        return len;
+    }
+
     console.log('convertLengthOuter');
     if (oldUnit.includes('meter') && newUnit.includes('meter')) {
         console.log('convertLengthInner');
