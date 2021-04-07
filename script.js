@@ -88,7 +88,7 @@ const convertLengthHelper = (len, oldUnit, newUnit) => {
 
 const convertLength = (len, oldUnit, newUnit) => {
     console.log('convertLengthOuter');
-    if (oldUnit.includes('meter') && oldUnit.includes('meter')) {
+    if (oldUnit.includes('meter') && newUnit.includes('meter')) {
         console.log('convertLengthInner');
         return convertMeters(len, oldUnit, newUnit);
     } else {
