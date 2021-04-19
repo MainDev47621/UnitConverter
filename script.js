@@ -85,7 +85,7 @@ const lengthMatrixIndex = {
     'yard' : 2,
     'mile' : 3,
     'lightYear' : 4,
-    'meter' : 5
+    'unitmeter' : 5
 }
 
 // Helper function for conversions in which both units are metric
@@ -98,15 +98,13 @@ const convertLengthHelper = (len, oldUnit, newUnit) => {
     let newLen = len;
     if (oldUnit.includes('meter')) {
         newLen *= metricPrefixes[oldUnit.slice(0, -5)];
+        return newLen * lengthConversionMatrix[lengthMatrixIndex['unitmeter']][lengthMatrixIndex[newUnit]];
+    } else if (newUnit.includes('meter')) {
+        newLen *= lengthConversionMatrix[lengthMatrixIndex[oldUnit]][lengthMatrixIndex['unitmeter']];
+        return newLen / metricPrefixes[newUnit.slice(0, -5)];
+    } else {
+        return newLen * lengthConversionMatrix[lengthMatrixIndex[oldUnit]][lengthMatrixIndex[newUnit]];
     }
-
-    newLen *= lengthConversionMatrix[lengthMatrixIndex[oldUnit]][lengthMatrixIndex[newUnit]];
-
-    if (newUnit.includes('meter')) {
-        newLen /= metricPrefixes[newUnit.slice(0, -5)];
-    }
-
-    return newLen;
 }
 
 const convertLength = (len, oldUnit, newUnit) => {
