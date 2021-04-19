@@ -114,9 +114,7 @@ const convertLength = (len, oldUnit, newUnit) => {
         return len;
     }
 
-    console.log('convertLengthOuter');
     if (oldUnit.includes('meter') && newUnit.includes('meter')) {
-        console.log('convertLengthInner');
         return convertMeters(len, oldUnit, newUnit);
     } else {
         return convertLengthHelper(len, oldUnit, newUnit);
