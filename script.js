@@ -96,7 +96,9 @@ const convertMeters = (len, oldUnit, newUnit) => {
 // Helper function for conversions in which only one or neither unit is metric
 const convertLengthHelper = (len, oldUnit, newUnit) => {
     let newLen = len;
-    if (oldUnit.includes('meter')) {
+    if (oldUnit.includes('meter') && newUnit.includes('meter')) {
+        return len * (metricPrefixes[oldUnit.slice(0, -5)] / metricPrefixes[newUnit.slice(0, -5)]);
+    } else if (oldUnit.includes('meter')) {
         newLen *= metricPrefixes[oldUnit.slice(0, -5)];
         return newLen * lengthConversionMatrix[lengthMatrixIndex['unitmeter']][lengthMatrixIndex[newUnit]];
     } else if (newUnit.includes('meter')) {
@@ -110,10 +112,6 @@ const convertLengthHelper = (len, oldUnit, newUnit) => {
 const convertLength = (len, oldUnit, newUnit) => {
     if (oldUnit === newUnit) {
         return len;
-    }
-
-    if (oldUnit.includes('meter') && newUnit.includes('meter')) {
-        return convertMeters(len, oldUnit, newUnit);
     } else {
         return convertLengthHelper(len, oldUnit, newUnit);
     }
