@@ -115,7 +115,7 @@ const convertLength = (len, oldUnit, newUnit) => {
 
 //Area Conversion
 
-const convertArea(area, oldUnit, newUnit) {
+const convertArea = (area, oldUnit, newUnit) => {
     if (oldUnit === newUnit) {
         return area;
     } else {
