@@ -88,11 +88,6 @@ const lengthMatrixIndex = {
     'unitmeter' : 5
 }
 
-// Helper function for conversions in which both units are metric
-const convertMeters = (len, oldUnit, newUnit) => {
-    return len * (metricPrefixes[oldUnit.slice(0, -5)] / metricPrefixes[newUnit.slice(0, -5)]);
-}
-
 // Helper function for conversions in which only one or neither unit is metric
 const convertLengthHelper = (len, oldUnit, newUnit) => {
     let newLen = len;
